@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class CocktailSort extends SortVariant{
 
     public CocktailSort(int[] a){
@@ -5,39 +8,33 @@ public class CocktailSort extends SortVariant{
     }
 
     @Override
-    public void sort()
-    {
-        boolean swapped = true;
-        int start = 0;
-        int end = buf.length;
-
-        while (swapped) {
-            swapped = false;
-
-            for (int i = start; i < end - 1; ++i) {
+    public ArrayList<int[]> sort(){
+        int buff;
+        int left = 0;
+        int right = buf.length - 1;
+        ArrayList<int[]> sort_mas = new ArrayList<int[]>();
+        sort_mas.add(Arrays.copyOf(buf,buf.length));
+        do {
+            for (int i = left; i < right; i++) {
                 if (buf[i] > buf[i + 1]) {
-                    int temp = buf[i];
+                    buff = buf[i];
                     buf[i] = buf[i + 1];
-                    buf[i + 1] = temp;
-                    swapped = true;
+                    buf[i + 1] = buff;
                 }
             }
-
-            if (swapped)
-                break;
-
-            swapped = false;
-            end = end - 1;
-
-            for (int i = end - 1; i >= start; i--) {
-                if (buf[i] > buf[i + 1]) {
-                    int temp = buf[i];
-                    buf[i] = buf[i + 1];
-                    buf[i + 1] = temp;
-                    swapped = true;
+            sort_mas.add(Arrays.copyOf(buf,buf.length));
+            right--;
+            for (int i = right; i > left; i--) {
+                if (buf[i] < buf[i - 1]) {
+                    buff = buf[i];
+                    buf[i] = buf[i - 1];
+                    buf[i - 1] = buff;
                 }
             }
-            start = start + 1;
-        }
+            sort_mas.add(Arrays.copyOf(buf,buf.length));
+            left++;
+        } while (left < right);
+        sorted = Arrays.copyOf(buf,buf.length);
+        return sort_mas;
     }
 }
