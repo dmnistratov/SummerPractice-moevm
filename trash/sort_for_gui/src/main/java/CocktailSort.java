@@ -13,7 +13,6 @@ public class CocktailSort extends SortVariant{
         int left = 0;
         int right = buf.length - 1;
         ArrayList<int[]> sort_mas = new ArrayList<int[]>();
-        sort_mas.add(Arrays.copyOf(buf,buf.length));
         do {
             for (int i = left; i < right; i++) {
                 if (buf[i] > buf[i + 1]) {
