@@ -13,4 +13,4 @@ UML use case diamgramm:
 
 UML class diamgramm:
 
-![uml](https://user-images.githubusercontent.com/54906416/124344974-807f9680-dbde-11eb-8e8e-7197114e1dbb.png)
+![uml (1)](https://user-images.githubusercontent.com/54906416/124573980-b2992e80-de52-11eb-8118-f185d62e6381.png)
