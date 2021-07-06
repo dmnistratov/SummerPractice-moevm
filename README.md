@@ -4,7 +4,7 @@
 Задача: Различные алгоритмы сортировки (Bubble Sort, Cocktail Sort, Heap sort)
 
 UML use case diamgramm: 
-![use-case](https://user-images.githubusercontent.com/54906416/124311871-1384e600-db77-11eb-955a-47612ec890ec.png)
+![use-case_v0 2](https://user-images.githubusercontent.com/54906416/124542335-e2810b80-de2b-11eb-9644-9b4048e49470.png)
 
 UML class diamgramm:
 
