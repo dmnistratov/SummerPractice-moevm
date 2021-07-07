@@ -1,28 +1,57 @@
 package algorithms;
 
+import org.apache.log4j.Logger;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
 public abstract class SortVariant {
-    public final int[] start;
-    public int[] buf;
-    public int[] sorted;
+
+    private static final Logger log = Logger.getLogger(SortVariant.class);
+
+    public ArrayList<int[]> stepSort;
+    public int position;
 
     public SortVariant(int[] a){
-        this.start = a;
-        this.buf = Arrays.copyOf(a, a.length);
+        this.stepSort = new ArrayList<int[]>();
+        this.stepSort.add(Arrays.copyOf(a,a.length));
+        this.position = 0;
     }
 
-    public int[] returnStart(){
-        return start;
+    abstract public void setStepSort();
+
+    public int[] getNextStep(){
+        if(position < stepSort.size()-1){
+            log.info("Change position");
+            position++;
+        }else{
+            log.error("Cant go next");
+        }
+        return stepSort.get(position);
     }
 
-    public boolean check_sorted(){
-        return true;
+    public int[] getPrevStep(){
+        if(position > 0){
+            log.info("Change position");
+            position--;
+        }else{
+            log.error("Cant go prev");
+        }
+        return stepSort.get(position);
     }
 
-    public static boolean check_sorted(int[] buf){
-        return true;
+    public int[] getLastStep(){
+        log.info("Move to last");
+        return stepSort.get(stepSort.size()-1);
     }
 
+    public int[] getFirstStep(){
+        log.info("Move to first");
+        return stepSort.get(0);
+    }
+
+    public int[] getCurrentStep(){
+        log.info("Get current");
+        return stepSort.get(position);
+    }
 }

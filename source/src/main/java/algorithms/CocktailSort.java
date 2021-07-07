@@ -1,41 +1,43 @@
 package algorithms;
 
-import java.util.ArrayList;
+import org.apache.log4j.Logger;
+
 import java.util.Arrays;
 
 public class CocktailSort extends SortVariant {
+
+    private static final Logger log = Logger.getLogger(CocktailSort.class);
 
     public CocktailSort(int[] a){
         super(a);
     }
 
-    public ArrayList<int[]> sort(){
-        int buff;
+    @Override
+    public void setStepSort() {
+        log.info("Cocktail steps");
+        int buffV;
+        int[] buff = Arrays.copyOf(stepSort.get(0), stepSort.get(0).length);
         int left = 0;
-        int right = buf.length - 1;
-        ArrayList<int[]> sort_mas = new ArrayList<int[]>();
-        sort_mas.add(Arrays.copyOf(buf,buf.length));
+        int right = buff.length - 1;
         do {
             for (int i = left; i < right; i++) {
-                if (buf[i] > buf[i + 1]) {
-                    buff = buf[i];
-                    buf[i] = buf[i + 1];
-                    buf[i + 1] = buff;
+                if (buff[i] > buff[i + 1]) {
+                    buffV = buff[i];
+                    buff[i] = buff[i + 1];
+                    buff[i + 1] = buffV;
                 }
             }
-            sort_mas.add(Arrays.copyOf(buf,buf.length));
+            stepSort.add(Arrays.copyOf(buff,buff.length));
             right--;
             for (int i = right; i > left; i--) {
-                if (buf[i] < buf[i - 1]) {
-                    buff = buf[i];
-                    buf[i] = buf[i - 1];
-                    buf[i - 1] = buff;
+                if (buff[i] < buff[i - 1]) {
+                    buffV = buff[i];
+                    buff[i] = buff[i - 1];
+                    buff[i - 1] = buffV;
                 }
             }
-            sort_mas.add(Arrays.copyOf(buf,buf.length));
+            stepSort.add(Arrays.copyOf(buff,buff.length));
             left++;
         } while (left < right);
-        sorted = Arrays.copyOf(buf,buf.length);
-        return sort_mas;
     }
 }
