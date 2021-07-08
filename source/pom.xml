@@ -52,7 +52,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>sortVisualiser.SortVisualiser</mainClass>
+                            <mainClass>visuliser.SortVisualiser</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>
