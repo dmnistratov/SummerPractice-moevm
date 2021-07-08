@@ -1,153 +1,142 @@
-package sortVisualiser;
+package visuliser;
+
+import algorithms.BubbleSort;
+import algorithms.CocktailSort;
+import algorithms.HeapSort;
 
 import javax.swing.*;
-import javax.swing.text.DefaultFormatter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.imageio.ImageIO;
 
 public class SortVisualiser {
     public static final int WIN_WIDTH = 1600;
     public static final int WIN_HEIGHT = 900;
 
-    private JFrame window;
-    private SortArray sortArray;
-    private JPanel actionPanel;
-
-    public SortVisualiser(){
-        window = new JFrame("Sort visualisation");
-        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        window.setSize(WIN_WIDTH,WIN_HEIGHT);
-        window.setLocationRelativeTo(null);
-        window.setLayout(null);
-        window.setResizable(false);
-
-        sortArray = new SortArray();
-        sortArray.setBounds(10, 25, 1024, 800);
-
-        actionPanel = new JPanel();
-        actionPanel.setBounds(1050, 25, 520, 800);
-        actionPanel.setLayout(null);
-        actionPanel.setBackground(Color.GRAY);
-
-        JLabel infoText = new JLabel("", SwingConstants.CENTER);
-        JButton helpButton = new JButton("Help");
-        JButton nextStep = new JButton();
-        JButton prevStep = new JButton();
-        JButton stopStep = new JButton();
-        JButton continueStep = new JButton("Continue animation");
-        String[] algStr = {"Bubble Sort", "Cocktail Sort", "Heap Sort", "Compare All Sorts"};
-        JComboBox chooseSort = new JComboBox(algStr);
-        JButton startAlgorithm = new JButton("Start sorting");
-        JSpinner elements = new JSpinner(new SpinnerNumberModel(2, 2, 100, 1));
-        JButton createElements = new JButton("Create Elements");
-        ButtonGroup group = new ButtonGroup();
-        JRadioButton inputElements = new JRadioButton("Input");
-        JRadioButton generateElements = new JRadioButton("Generate");
-
-        helpButton.setBounds(450, 10, 60, 40);
-        infoText.setBounds(10, 60, 500, 300);
-        infoText.setText("Information display here");
-        infoText.setOpaque(true);
-        infoText.setBackground(Color.darkGray);
-        infoText.setForeground(Color.white);
-        nextStep.setBounds(300, 385, 40, 40);
-        nextStep.setEnabled(false);
-        stopStep.setBounds(240, 385, 40, 40);
-        stopStep.setEnabled(false);
-        prevStep.setBounds(180, 385 ,40, 40);
-        prevStep.setEnabled(false);
-
-        try {
-            Image rightArrow = ImageIO.read(getClass().getClassLoader().getResource("right-icon.png"));
-            Image leftArrow = ImageIO.read(getClass().getClassLoader().getResource("left-icon.png"));
-            Image pause = ImageIO.read(getClass().getClassLoader().getResource("pause-icon.png"));
-            prevStep.setIcon(new ImageIcon(leftArrow));
-            nextStep.setIcon(new ImageIcon(rightArrow));
-            stopStep.setIcon(new ImageIcon(pause));
-
-        } catch (Exception e) {
-            System.out.println(e);
-            // ERROR HANDLING #TODO
-        }
-        continueStep.setBounds(180, 445, 160, 40);
-        continueStep.setEnabled(false);
-        chooseSort.setBounds(10, 505, 500, 30);
-        startAlgorithm.setBounds(10, 760, 500, 30);
-        startAlgorithm.setEnabled(false);
-        elements.setBounds(470, 590, 40, 30);
-        ((DefaultFormatter)((JSpinner.DefaultEditor)elements.getEditor()).getTextField().getFormatter()).setAllowsInvalid(false);
-        createElements.setBounds(10, 640, 500, 30);
-        inputElements.setBounds(10, 590, 225, 30);
-        generateElements.setBounds(235, 590, 225, 30);
-        group.add(inputElements);
-        group.add(generateElements);
-        chooseSort.setSelectedIndex(0);
-
-        helpButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null, "Help info! #TODO", "Help info", JOptionPane.INFORMATION_MESSAGE);
-            }
-        });
-
-        createElements.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-               /*
-               sortArray.init();
-                sortArray.repaint();
-              */
-                startAlgorithm.setEnabled(true);
-            }
-        });
-
-        stopStep.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                sortArray.setPause(true);
-            }
-        });
-
-        continueStep.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                sortArray.setPause(false);
-            }
-        });
-
-        startAlgorithm.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                prevStep.setEnabled(true);
-                nextStep.setEnabled(true);
-                continueStep.setEnabled(true);
-                stopStep.setEnabled(true);
-            }
-        });
-        actionPanel.add(infoText);
-        actionPanel.add(helpButton);
-        actionPanel.add(nextStep);
-        actionPanel.add(prevStep);
-        actionPanel.add(stopStep);
-        actionPanel.add(continueStep);
-        actionPanel.add(chooseSort);
-        actionPanel.add(startAlgorithm);
-        actionPanel.add(elements);
-        actionPanel.add(createElements);
-        actionPanel.add(inputElements);
-        actionPanel.add(generateElements);
+    public JFrame window;
+    public SortArray drawerPanel;
+    public ActionMenu actionPanel;
 
 
-        window.add(sortArray);
-        window.add(actionPanel);
-        window.setVisible(true);
+    private SortVisualiser() {}
 
-        sortArray.init();
-        sortArray.startSorting();
+    public static Builder newBuilder(){
+        return new SortVisualiser().new Builder();
     }
+
+    public class Builder {
+        private Builder() { }
+
+        public Builder setWindow() {
+            window = new JFrame("Sort Visualisation");
+            window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            window.setSize(WIN_WIDTH,WIN_HEIGHT);
+            window.setLocationRelativeTo(null);
+            window.setLayout(null);
+            window.setResizable(false);
+            return this;
+        }
+
+        public Builder setActionPanel(){
+            actionPanel = new ActionMenu();
+            actionPanel.setBounds(1050, 25, 520, 800);
+            actionPanel.setLayout(null);
+            actionPanel.setBackground(Color.gray);
+
+            actionPanel.helpButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    System.out.println("help");
+                }
+            });
+
+            actionPanel.nextStep.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    drawerPanel.setNext(true);
+                    drawerPanel.repaint();
+                    System.out.println("next");
+                }
+            });
+
+            actionPanel.prevStep.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    drawerPanel.setPrev(true);
+                    drawerPanel.repaint();
+                    System.out.println("prev");
+                }
+            });
+
+            actionPanel.pause.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    System.out.println("pause");
+                    if (drawerPanel.pause) drawerPanel.setPause(false);
+                    else drawerPanel.setPause(true);
+                }
+            });
+
+            actionPanel.createElements.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    drawerPanel.setSizeOfArray((int)actionPanel.elements.getValue());
+                    drawerPanel.generate();
+                    switch (actionPanel.chooseSort.getSelectedIndex()){
+                        case 0:
+                            drawerPanel.setAlgorithm(new BubbleSort(drawerPanel.array));
+                            break;
+                        case 1:
+                            drawerPanel.setAlgorithm(new CocktailSort(drawerPanel.array));
+                            break;
+                        case 2:
+                            drawerPanel.setAlgorithm(new HeapSort(drawerPanel.array));
+                            break;
+                        case 3:
+                            drawerPanel.setAlgorithm(new BubbleSort(drawerPanel.array));
+                            break;
+
+                    }
+                    System.out.println("create");
+                    drawerPanel.repaint();
+                    actionPanel.startAlgorithm.setEnabled(true);
+                }
+            });
+
+            actionPanel.startAlgorithm.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    System.out.println("start");
+                    drawerPanel.startSorting();
+                    drawerPanel.animate();
+                    actionPanel.prevStep.setEnabled(true);
+                    actionPanel.nextStep.setEnabled(true);
+                    actionPanel.pause.setEnabled(true);
+                }
+            });
+
+            return this;
+        }
+
+        public Builder setDrawerPanel(){
+            drawerPanel = new SortArray();
+            drawerPanel.setBounds(10, 25, 1024, 800);
+            drawerPanel.setBackground(Color.gray);
+            return this;
+        }
+
+        public SortVisualiser build(){
+            window.add(actionPanel);
+            window.add(drawerPanel);
+            window.setVisible(true);
+            return new SortVisualiser();
+        }
+
+    }
+
     public static void main(String[] args){
-        SortVisualiser sortVisualiser = new SortVisualiser();
+        SortVisualiser sortVisualiser = SortVisualiser.newBuilder().setWindow().setDrawerPanel().setActionPanel().build();
+        Thread drawThread = new Thread(sortVisualiser.drawerPanel);
+        drawThread.start();
     }
 }

@@ -1,54 +1,67 @@
-package sortVisualiser;
+package visuliser;
 
-import algorithms.BubbleSort;
+import algorithms.SortVariant;
 
 import javax.swing.JPanel;
 import java.awt.*;
 import java.util.Random;
 
 
-public class SortArray extends JPanel{
+public class SortArray extends JPanel implements Runnable{
     public static final int WIN_WIDTH = 1024;
     public static final int WIN_HEIGHT = 800;
-    private static final int BAR_WIDTH = 5;
-    private static final int NUM_BARS = WIN_WIDTH/ BAR_WIDTH + 1;
+    private static int BAR_WIDTH = 5;
+    private static int NUM_BARS = WIN_WIDTH/ BAR_WIDTH;
     public int[] array;
-    public boolean pause;
+    public SortVariant ISort;
+    public boolean pause, next, prev;
+    public int pos = 0;
 
     public SortArray() {
         array = new int[NUM_BARS];
         pause = false;
+        next = false;
+        prev = false;
         setBackground(Color.darkGray);
     }
 
-    public void init(){
+    public void generate(){
         array = new int[NUM_BARS];
         for (int i = 0; i < NUM_BARS; i++) {
             array[i] = i;
         }
         shuffleArray();
     }
+    public void setNext(boolean b){
+        next = b;
+        array = ISort.getNextStep();
+    }
 
+    public void setPrev(boolean b){
+        prev = b;
+        array = ISort.getPrevStep();
+    }
+
+    public void setSizeOfArray(int sizeOfArray){
+        array = new int[sizeOfArray];
+        BAR_WIDTH = WIN_WIDTH/sizeOfArray;
+        NUM_BARS = sizeOfArray;
+    }
+
+    public void setAlgorithm(SortVariant algorithm){
+        ISort = algorithm;
+    }
     public void setPause(boolean b){
         pause = b;
     }
 
     public void startSorting(){
+        ISort.setStepSort();
+        /*
         BubbleSort Bsort = new BubbleSort(array);
-        Bsort.sort(this);
+        Bsort.sort(this);*/
     }
 
-    public void swapArray(int firstIndex, int secondIndex){
-        int temp = array[firstIndex];
-        array[firstIndex] = array[secondIndex];
-        array[secondIndex] = temp;
-
-        repaint();
-        int delay = 1; // number of milliseconds to sleep
-
-        long start = System.currentTimeMillis();
-        while(start >= System.currentTimeMillis() - delay);
-    }
     void shuffleArray() {
         Random rng = new Random();
         for (int i = 0; i < NUM_BARS; i++){
@@ -56,6 +69,40 @@ public class SortArray extends JPanel{
             int temp = array[i];
             array[i] = array[swapWithIndex];
             array[swapWithIndex] = temp;
+        }
+    }
+
+    public void animate() {
+        int delay = 1; // number of milliseconds to sleep
+
+        for (pos = 0; pos < ISort.stepSort.size(); pos++) {
+            array = ISort.stepSort.get(pos);
+            repaint();
+
+            try {
+                Thread.sleep(1);
+            } catch (InterruptedException e) {
+
+            }
+            while (pause){
+                try {
+                    if (next){
+                        pos++;
+                        pause = false;
+                        next = false;
+                        prev = false;
+                    }
+                    else if (prev){
+                        pos--;
+                        pause = false;
+                        next = false;
+                        prev = false;
+                    }
+                    Thread.sleep(1000)  ;
+                } catch (InterruptedException e){
+
+                }
+            }
         }
     }
 
@@ -72,5 +119,9 @@ public class SortArray extends JPanel{
 
             graphics.fillRect(xBegin, yBegin, BAR_WIDTH, height);
         }
+    }
+
+    @Override
+    public void run(){
     }
 }
