@@ -1,7 +1,5 @@
 package algorithms;
 
-import sortVisualiser.SortArray;
-
 import java.util.Arrays;
 
 import org.apache.log4j.Logger;
@@ -19,16 +17,6 @@ public class BubbleSort extends SortVariant {
         buff[first] = buff[second];
         buff[second] = dummy;
 
-    }
-
-    public void sort(SortArray srtArray){
-        log.info("Bubble");
-        for (int out = srtArray.array.length - 1; out >= 1; out--){
-            for (int in = 0; in < out; in++){
-                if(srtArray.array[in] > srtArray.array[in + 1])
-                    srtArray.swapArray(in, in + 1);
-            }
-        }
     }
 
     @Override
