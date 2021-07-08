@@ -6,8 +6,10 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="test" />
         <module name="SortVisualiser" />
+        <module name="source" />
+        <module name="test" />
+        <module name="sort_fix" />
       </profile>
     </annotationProcessing>
   </component>

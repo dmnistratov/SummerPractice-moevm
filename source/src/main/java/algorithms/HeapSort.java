@@ -1,54 +1,56 @@
 package algorithms;
 
-import java.util.ArrayList;
+import org.apache.log4j.Logger;
+
 import java.util.Arrays;
 
 public class HeapSort extends SortVariant {
+
+    private static final Logger log = Logger.getLogger(HeapSort.class);
 
     public HeapSort(int[] a){
         super(a);
     }
 
-    public ArrayList<int[]> sort()
-    {
-        int n = buf.length;
-        ArrayList<int[]> sort_mas = new ArrayList<int[]>();
+    @Override
+    public void setStepSort(){
+        log.info("Heap steps");
+        int[] buff = Arrays.copyOf(stepSort.get(0), stepSort.get(0).length);
+        int n = buff.length;
 
         for (int i = n / 2 - 1; i >= 0; i--) {
-            heapify(n, i);
-            sort_mas.add(Arrays.copyOf(buf, buf.length));
+            heapify(buff, n, i);
+            stepSort.add(Arrays.copyOf(buff, buff.length));
         }
 
         for (int i=n-1; i>=0; i--){
-            int temp = buf[0];
-            buf[0] = buf[i];
-            buf[i] = temp;
+            int temp = buff[0];
+            buff[0] = buff[i];
+            buff[i] = temp;
 
-            heapify(i, 0);
-            sort_mas.add(Arrays.copyOf(buf, buf.length));
+            heapify(buff, i, 0);
+            stepSort.add(Arrays.copyOf(buff, buff.length));
         }
-        sorted = Arrays.copyOf(buf,buf.length);
-        return sort_mas;
     }
 
 
-    void heapify(int n, int i) {
+    void heapify(int[] buff,int n, int i) {
         int largest = i;
         int l = 2*i + 1;
         int r = 2*i + 2;
 
-        if (l < n && buf[l] > buf[largest])
+        if (l < n && buff[l] > buff[largest])
             largest = l;
 
-        if (r < n && buf[r] > buf[largest])
+        if (r < n && buff[r] > buff[largest])
             largest = r;
 
         if (largest != i){
-            int swap = buf[i];
-            buf[i] = buf[largest];
-            buf[largest] = swap;
+            int swap = buff[i];
+            buff[i] = buff[largest];
+            buff[largest] = swap;
 
-            heapify(n, largest);
+            heapify(buff ,n, largest);
         }
     }
 
