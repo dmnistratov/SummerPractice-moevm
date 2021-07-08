@@ -9,7 +9,7 @@
 - [ ] Ограничение ввода кол-ва элементов. (Расчитать макс. кол-во отображаемых элементов в рабочей области)
 
 UML use case diamgramm: 
-![use-case_v0 2](https://user-images.githubusercontent.com/54906416/124542335-e2810b80-de2b-11eb-9644-9b4048e49470.png)
+![uml_use_case](https://user-images.githubusercontent.com/54906416/124887681-0f752000-dfde-11eb-9ca6-deb9ae9c3754.png)
 
 UML class diamgramm:
 
