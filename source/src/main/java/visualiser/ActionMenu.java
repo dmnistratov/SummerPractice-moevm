@@ -1,4 +1,4 @@
-package visuliser;
+package visualiser;
 
 import javax.swing.*;
 import javax.swing.text.DefaultFormatter;

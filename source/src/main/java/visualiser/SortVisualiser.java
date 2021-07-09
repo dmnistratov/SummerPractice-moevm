@@ -1,4 +1,4 @@
-package visuliser;
+package visualiser;
 
 import algorithms.BubbleSort;
 import algorithms.CocktailSort;
