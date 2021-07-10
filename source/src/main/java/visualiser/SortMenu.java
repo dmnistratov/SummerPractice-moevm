@@ -7,6 +7,7 @@ import java.awt.*;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class SortMenu extends JPanel {
     public static final int WIN_WIDTH = 1600;
@@ -16,14 +17,21 @@ public class SortMenu extends JPanel {
     int BAR_WIDTH;
     int NUM_BARS;
 
+    AtomicBoolean pause;
+
     Timer time;
     SortVariant algorithm;
+    int[] pair;
 
     SortMenu() {
         setBounds(0, 0, WIN_WIDTH, WIN_HEIGHT);
         setBackground(Color.gray);
         setLayout(null);
         array = new int[100];
+        pair = new int[2];
+        pair[0] = -1;
+        pair[1] = -1;
+        pause = new AtomicBoolean(true);
     }
 
     void setArray(int[] newArray) {
@@ -89,21 +97,25 @@ public class SortMenu extends JPanel {
 
     void startStep(){
         System.arraycopy(algorithm.getFirstStep(), 0, array, 0, NUM_BARS);
+        System.arraycopy(algorithm.pair.get(algorithm.position), 0, pair, 0, 2);
         repaint();
     }
 
     void prevStep(){
         System.arraycopy(algorithm.getPrevStep(), 0, array, 0, NUM_BARS);
+        System.arraycopy(algorithm.pair.get(algorithm.position), 0, pair, 0, 2);
         repaint();
     }
 
     void nextStep(){
         System.arraycopy(algorithm.getNextStep(), 0, array, 0, NUM_BARS);
+        System.arraycopy(algorithm.pair.get(algorithm.position), 0, pair, 0, 2);
         repaint();
     }
 
     void endStep(){
         System.arraycopy(algorithm.getLastStep(), 0, array, 0, NUM_BARS);
+        System.arraycopy(algorithm.pair.get(algorithm.position), 0, pair, 0, 2);
         repaint();
     }
 
@@ -121,8 +133,9 @@ public class SortMenu extends JPanel {
             @Override
             public void run() {
                 System.arraycopy(algorithm.getNextStep(), 0, array, 0, NUM_BARS);
+                System.arraycopy(algorithm.pair.get(algorithm.position), 0, pair, 0, 2);
                 repaint();
-                if (algorithm.position == algorithm.stepSort.size() - 1){
+                if (algorithm.position == algorithm.stepSort.size() - 1 || pause.get()){
                     System.out.println("timer stopped");
                     time.cancel();
                     return;
@@ -141,7 +154,7 @@ public class SortMenu extends JPanel {
             int xBegin = x + (BAR_WIDTH - 1) * x;
             int yBegin = WIN_HEIGHT - height;
 
-            if (x == 13 || x == 52) {
+            if (x == pair[0] || x == pair[1]) {
                 graphics.setColor(Color.red);
             } else {
                 graphics.setColor(Color.white);
