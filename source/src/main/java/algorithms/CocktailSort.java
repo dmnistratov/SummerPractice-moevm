@@ -25,18 +25,20 @@ public class CocktailSort extends SortVariant {
                     buffV = buff[i];
                     buff[i] = buff[i + 1];
                     buff[i + 1] = buffV;
+                    pair.add(new int[] {i, i + 1});
+                    stepSort.add(Arrays.copyOf(buff,buff.length));
                 }
             }
-            stepSort.add(Arrays.copyOf(buff,buff.length));
             right--;
             for (int i = right; i > left; i--) {
                 if (buff[i] < buff[i - 1]) {
                     buffV = buff[i];
                     buff[i] = buff[i - 1];
                     buff[i - 1] = buffV;
+                    pair.add(new int[] {i, i - 1});
+                    stepSort.add(Arrays.copyOf(buff,buff.length));
                 }
             }
-            stepSort.add(Arrays.copyOf(buff,buff.length));
             left++;
         } while (left < right);
     }

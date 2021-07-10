@@ -73,7 +73,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>sortVisualiser.SortVisualiser</mainClass>
+                            <mainClass>visualiser.SortVisualiser</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

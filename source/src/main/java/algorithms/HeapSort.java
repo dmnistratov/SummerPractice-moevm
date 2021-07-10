@@ -20,7 +20,7 @@ public class HeapSort extends SortVariant {
 
         for (int i = n / 2 - 1; i >= 0; i--) {
             heapify(buff, n, i);
-            stepSort.add(Arrays.copyOf(buff, buff.length));
+
         }
 
         for (int i=n-1; i>=0; i--){
@@ -28,8 +28,9 @@ public class HeapSort extends SortVariant {
             buff[0] = buff[i];
             buff[i] = temp;
 
-            heapify(buff, i, 0);
+            pair.add(new int[] {0, i});
             stepSort.add(Arrays.copyOf(buff, buff.length));
+            heapify(buff, i, 0);
         }
     }
 
@@ -50,6 +51,8 @@ public class HeapSort extends SortVariant {
             buff[i] = buff[largest];
             buff[largest] = swap;
 
+            pair.add(new int[] {i, largest});
+            stepSort.add(Arrays.copyOf(buff, buff.length));
             heapify(buff ,n, largest);
         }
     }

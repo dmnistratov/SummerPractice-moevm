@@ -28,6 +28,7 @@ public class BubbleSort extends SortVariant {
                 int[] buff = Arrays.copyOf(stepSort.get(size-1), stepSort.get(size-1).length);
                 if(buff[in] > buff[in + 1]) {
                     toSwap(buff, in, in + 1);
+                    pair.add(new int[] {in, in + 1});
                     stepSort.add(Arrays.copyOf(buff, buff.length));
                 }
             }
