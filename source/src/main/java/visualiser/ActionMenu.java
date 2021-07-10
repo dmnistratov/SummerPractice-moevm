@@ -6,6 +6,7 @@ import javax.imageio.ImageIO;
 
 public class ActionMenu extends JPanel {
     JButton helpButton, settingsButton, startStep, endStep, nextStep, prevStep, playStep, infoButton;
+    ImageIcon pauseIcon, playIcon;
 
     ActionMenu() {
         setBounds(0, 800, 1600, 100);
@@ -38,6 +39,9 @@ public class ActionMenu extends JPanel {
             Image helpIMG = ImageIO.read(getClass().getClassLoader().getResource("help-icon.png"));
             Image consoleIMG = ImageIO.read(getClass().getClassLoader().getResource("console-icon.png"));
             Image settingsIMG = ImageIO.read(getClass().getClassLoader().getResource("setting-icon.png"));
+            Image pauseIMG = ImageIO.read(getClass().getClassLoader().getResource("pause-icon.png"));
+            pauseIcon = new ImageIcon(pauseIMG);
+            playIcon = new ImageIcon(playIMG);
             prevStep.setIcon(new ImageIcon(leftArrow));
             nextStep.setIcon(new ImageIcon(rightArrow));
             helpButton.setIcon(new ImageIcon(helpIMG));
@@ -45,7 +49,7 @@ public class ActionMenu extends JPanel {
             startStep.setIcon(new ImageIcon(startArrow));
             endStep.setIcon(new ImageIcon(endArrow));
             infoButton.setIcon(new ImageIcon(consoleIMG));
-            playStep.setIcon(new ImageIcon(playIMG));
+            playStep.setIcon(playIcon);
 
         } catch (Exception e) {
             System.out.println(e);

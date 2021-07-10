@@ -58,7 +58,14 @@ public class Visualise extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 text.append(">> Start of Animation:\n");
                 text.append("Sorted array: " + Arrays.toString(drawMenu.array) + "\n");
-                drawMenu.animate();
+                drawMenu.pause.set(!drawMenu.pause.get());
+                if (!drawMenu.pause.get()) {
+                    actionMenu.playStep.setIcon(actionMenu.pauseIcon);
+                    drawMenu.animate();
+                }
+                else{
+                    actionMenu.playStep.setIcon(actionMenu.playIcon);
+                }
                 text.append("Swapped elements: " + (drawMenu.algorithm.stepSort.size() - 1) + "\n");
             }
         });
