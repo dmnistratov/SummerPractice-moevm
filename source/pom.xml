@@ -23,6 +23,11 @@
             <artifactId>log4j</artifactId>
             <version>1.2.17</version>
         </dependency>
+        <dependency>
+            <groupId>com.jidesoft</groupId>
+            <artifactId>jide-oss</artifactId>
+            <version>3.6.18</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -40,6 +45,7 @@
             </plugin>
 
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-assembly-plugin</artifactId>
                 <executions>
                     <execution>
@@ -52,7 +58,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>visuliser.SortVisualiser</mainClass>
+                            <mainClass>visualiser.SortVisualiser</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>

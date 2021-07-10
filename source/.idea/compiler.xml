@@ -10,6 +10,7 @@
         <module name="source" />
         <module name="test" />
         <module name="sort_fix" />
+        <module name="SortVisualiser1.0" />
       </profile>
     </annotationProcessing>
   </component>

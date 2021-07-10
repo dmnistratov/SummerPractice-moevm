@@ -1,81 +1,64 @@
 package visualiser;
 
 import javax.swing.*;
-import javax.swing.text.DefaultFormatter;
 import java.awt.*;
 import javax.imageio.ImageIO;
 
-public class ActionMenu extends JPanel{
-        public JLabel infoText;
-        public JButton helpButton, nextStep, prevStep, pause, startAlgorithm, createElements;
-        public JComboBox chooseSort;
-        public JSpinner elements;
-        public ButtonGroup group;
-        public JRadioButton inputElements, generateElements;
+public class ActionMenu extends JPanel {
+    JButton helpButton, settingsButton, startStep, endStep, nextStep, prevStep, playStep, infoButton;
 
-        ActionMenu() {
-        infoText = new JLabel("", SwingConstants.CENTER);
-        helpButton = new JButton("Help");
+    ActionMenu() {
+        setBounds(0, 800, 1600, 100);
+        setBackground(Color.darkGray);
+        setLayout(null);
+
+        helpButton = new JButton();
+        settingsButton = new JButton();
+        startStep = new JButton();
+        endStep = new JButton();
         nextStep = new JButton();
         prevStep = new JButton();
-        pause = new JButton();
-        String[] algStr = {"Bubble Sort", "Cocktail Sort", "Heap Sort", "Compare All Sorts"};
-        chooseSort = new JComboBox(algStr);
-        startAlgorithm = new JButton("Start sorting");
-        elements = new JSpinner(new SpinnerNumberModel(2, 2, 200, 1));
-        createElements = new JButton("Create Elements");
-        group = new ButtonGroup();
-        inputElements = new JRadioButton("Input");
-        generateElements = new JRadioButton("Generate");
+        playStep = new JButton();
+        infoButton = new JButton();
 
-        helpButton.setBounds(450, 10, 60, 40);
-        infoText.setBounds(10, 60, 500, 300);
-        infoText.setText("Information display here");
-        infoText.setOpaque(true);
-        infoText.setBackground(Color.darkGray);
-        infoText.setForeground(Color.white);
-        nextStep.setBounds(300, 385, 40, 40);
-        nextStep.setEnabled(false);
-        pause.setBounds(240, 385, 40, 40);
-        pause.setEnabled(false);
-                try {
-                        Image rightArrow = ImageIO.read(getClass().getClassLoader().getResource("right-icon.png"));
-                        Image leftArrow = ImageIO.read(getClass().getClassLoader().getResource("left-icon.png"));
-                        Image pauseIMG = ImageIO.read(getClass().getClassLoader().getResource("pause-icon.png"));
-                        prevStep.setIcon(new ImageIcon(leftArrow));
-                        nextStep.setIcon(new ImageIcon(rightArrow));
-                        pause.setIcon(new ImageIcon(pauseIMG));
+        helpButton.setBounds(10, 18, 64, 64);
+        settingsButton.setBounds(1524, 18, 64, 64);
+        playStep.setBounds(768, 18, 64, 64);
+        prevStep.setBounds(664, 18, 64, 64);
+        startStep.setBounds(560, 18, 64, 64);
+        nextStep.setBounds(872, 18, 64, 64);
+        endStep.setBounds(976, 18, 64, 64);
+        infoButton.setBounds(1430, 18, 64, 64);
+        try {
+            Image rightArrow = ImageIO.read(getClass().getClassLoader().getResource("right-icon.png"));
+            Image leftArrow = ImageIO.read(getClass().getClassLoader().getResource("left-icon.png"));
+            Image playIMG = ImageIO.read(getClass().getClassLoader().getResource("play-icon.png"));
+            Image startArrow = ImageIO.read(getClass().getClassLoader().getResource("double-left-icon.png"));
+            Image endArrow = ImageIO.read(getClass().getClassLoader().getResource("double-right-icon.png"));
+            Image helpIMG = ImageIO.read(getClass().getClassLoader().getResource("help-icon.png"));
+            Image consoleIMG = ImageIO.read(getClass().getClassLoader().getResource("console-icon.png"));
+            Image settingsIMG = ImageIO.read(getClass().getClassLoader().getResource("setting-icon.png"));
+            prevStep.setIcon(new ImageIcon(leftArrow));
+            nextStep.setIcon(new ImageIcon(rightArrow));
+            helpButton.setIcon(new ImageIcon(helpIMG));
+            settingsButton.setIcon(new ImageIcon(settingsIMG));
+            startStep.setIcon(new ImageIcon(startArrow));
+            endStep.setIcon(new ImageIcon(endArrow));
+            infoButton.setIcon(new ImageIcon(consoleIMG));
+            playStep.setIcon(new ImageIcon(playIMG));
 
-                } catch (Exception e) {
-                        System.out.println(e);
-                        // ERROR HANDLING #TODO
-                }
-        prevStep.setBounds(180, 385, 40, 40);
-        prevStep.setEnabled(false);
-        chooseSort.setBounds(10, 505, 500, 30);
-        startAlgorithm.setBounds(10, 760, 500, 30);
-        startAlgorithm.setEnabled(false);
-        elements.setBounds(470, 590, 40, 30);
-        elements.setValue(100);
-        ((DefaultFormatter) ((JSpinner.DefaultEditor) elements.getEditor()).getTextField().getFormatter()).setAllowsInvalid(false);
-        createElements.setBounds(10, 640, 500, 30);
-        inputElements.setBounds(10, 590, 225, 30);
-        generateElements.setBounds(235, 590, 225, 30);
-        generateElements.setSelected(true);
-        group.add(inputElements);
-        group.add(generateElements);
-        chooseSort.setSelectedIndex(0);
+        } catch (Exception e) {
+            System.out.println(e);
+            // ERROR HANDLING #TODO
+        }
 
-        this.add(infoText);
-        this.add(helpButton);
-        this.add(nextStep);
-        this.add(prevStep);
-        this.add(pause);
-        this.add(chooseSort);
-        this.add(startAlgorithm);
-        this.add(elements);
-        this.add(createElements);
-        this.add(inputElements);
-        this.add(generateElements);
+        add(helpButton);
+        add(settingsButton);
+        add(playStep);
+        add(prevStep);
+        add(startStep);
+        add(nextStep);
+        add(endStep);
+        add(infoButton);
     }
 }
