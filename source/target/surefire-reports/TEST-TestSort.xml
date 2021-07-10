@@ -67,11 +67,11 @@
   <testcase classname="TestSort" name="testHeapSameEl" time="0.08"/>
   <testcase classname="TestSort" name="testCocktailEmpty" time="0"/>
   <testcase classname="TestSort" name="testHeap" time="0"/>
-  <testcase classname="TestSort" name="testMove" time="0.022"/>
+  <testcase classname="TestSort" name="testMove" time="0.023"/>
   <testcase classname="TestSort" name="testBubbleSameEl" time="0"/>
-  <testcase classname="TestSort" name="testCocktail" time="0.001"/>
+  <testcase classname="TestSort" name="testCocktail" time="0"/>
   <testcase classname="TestSort" name="testBubbleEmpty" time="0"/>
   <testcase classname="TestSort" name="testCocktailSameEl" time="0"/>
-  <testcase classname="TestSort" name="testHeapEmpty" time="0"/>
-  <testcase classname="TestSort" name="testBubble" time="0.001"/>
+  <testcase classname="TestSort" name="testHeapEmpty" time="0.001"/>
+  <testcase classname="TestSort" name="testBubble" time="0"/>
 </testsuite>
