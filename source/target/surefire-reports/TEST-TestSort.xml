@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="10" failures="0" name="TestSort" time="0.141" errors="0" skipped="0">
+<testsuite tests="10" failures="0" name="TestSort" time="0.104" errors="0" skipped="0">
   <properties>
     <property name="idea.version" value="2021.1.2"/>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="java.vm.version" value="11.0.11+9-LTS-194"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-11.0.11\bin"/>
-    <property name="maven.multiModuleProjectDirectory" value="C:\Users\Zipzap\Desktop\sort_fix"/>
+    <property name="maven.multiModuleProjectDirectory" value="C:\Users\Zipzap\Documents\GitHub\SummerPractice-moevm\source"/>
     <property name="java.vm.vendor" value="Oracle Corporation"/>
     <property name="java.vendor.url" value="https://openjdk.java.net/"/>
     <property name="guice.disable.misplaced.annotation.check" value="true"/>
@@ -16,7 +16,7 @@
     <property name="user.country" value="RU"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
-    <property name="user.dir" value="C:\Users\Zipzap\Desktop\sort_fix"/>
+    <property name="user.dir" value="C:\Users\Zipzap\Documents\GitHub\SummerPractice-moevm\source"/>
     <property name="java.vm.compressedOopsMode" value="Zero based"/>
     <property name="java.runtime.version" value="11.0.11+9-LTS-194"/>
     <property name="java.awt.graphicsenv" value="sun.awt.Win32GraphicsEnvironment"/>
@@ -64,14 +64,14 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="TestSort" name="testHeapSameEl" time="0.101"/>
+  <testcase classname="TestSort" name="testHeapSameEl" time="0.08"/>
   <testcase classname="TestSort" name="testCocktailEmpty" time="0"/>
   <testcase classname="TestSort" name="testHeap" time="0"/>
-  <testcase classname="TestSort" name="testMove" time="0.037"/>
-  <testcase classname="TestSort" name="testBubbleSameEl" time="0.001"/>
-  <testcase classname="TestSort" name="testCocktail" time="0"/>
-  <testcase classname="TestSort" name="testBubbleEmpty" time="0.001"/>
+  <testcase classname="TestSort" name="testMove" time="0.022"/>
+  <testcase classname="TestSort" name="testBubbleSameEl" time="0"/>
+  <testcase classname="TestSort" name="testCocktail" time="0.001"/>
+  <testcase classname="TestSort" name="testBubbleEmpty" time="0"/>
   <testcase classname="TestSort" name="testCocktailSameEl" time="0"/>
-  <testcase classname="TestSort" name="testHeapEmpty" time="0.001"/>
-  <testcase classname="TestSort" name="testBubble" time="0"/>
+  <testcase classname="TestSort" name="testHeapEmpty" time="0"/>
+  <testcase classname="TestSort" name="testBubble" time="0.001"/>
 </testsuite>
