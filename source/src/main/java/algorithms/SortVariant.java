@@ -42,11 +42,13 @@ public abstract class SortVariant {
 
     public int[] getLastStep(){
         log.info("Move to last");
+        position = stepSort.size() - 1;
         return stepSort.get(stepSort.size()-1);
     }
 
     public int[] getFirstStep(){
         log.info("Move to first");
+        position = 0;
         return stepSort.get(0);
     }
 
