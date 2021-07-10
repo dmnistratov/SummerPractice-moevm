@@ -25,7 +25,6 @@ public abstract class SortVariant {
 
     public int[] getNextStep(){
         if(position < stepSort.size()-1){
-            log.info("Change position");
             position++;
         }else{
             log.error("Cant go next");
@@ -35,7 +34,6 @@ public abstract class SortVariant {
 
     public int[] getPrevStep(){
         if(position > 0){
-            log.info("Change position");
             position--;
         }else{
             log.error("Cant go prev");
