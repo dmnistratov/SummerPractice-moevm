@@ -14,8 +14,8 @@ public abstract class SortVariant {
     public ArrayList<int[]> pair;
 
     public SortVariant(int[] a){
-        this.stepSort = new ArrayList<int[]>();
-        this.pair = new ArrayList<int[]>();
+        this.stepSort = new ArrayList<>();
+        this.pair = new ArrayList<>();
         this.pair.add(new int[] {0,0});
         this.stepSort.add(Arrays.copyOf(a,a.length));
         this.position = 0;
