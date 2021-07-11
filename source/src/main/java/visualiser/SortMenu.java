@@ -97,25 +97,25 @@ public class SortMenu extends JPanel {
 
     void startStep(){
         System.arraycopy(algorithm.getFirstStep(), 0, array, 0, NUM_BARS);
-        System.arraycopy(algorithm.pair.get(algorithm.position), 0, pair, 0, 2);
+        System.arraycopy(algorithm.pair.get(algorithm.getPosition()), 0, pair, 0, 2);
         repaint();
     }
 
     void prevStep(){
         System.arraycopy(algorithm.getPrevStep(), 0, array, 0, NUM_BARS);
-        System.arraycopy(algorithm.pair.get(algorithm.position), 0, pair, 0, 2);
+        System.arraycopy(algorithm.pair.get(algorithm.getPosition()), 0, pair, 0, 2);
         repaint();
     }
 
     void nextStep(){
         System.arraycopy(algorithm.getNextStep(), 0, array, 0, NUM_BARS);
-        System.arraycopy(algorithm.pair.get(algorithm.position), 0, pair, 0, 2);
+        System.arraycopy(algorithm.pair.get(algorithm.getPosition()), 0, pair, 0, 2);
         repaint();
     }
 
     void endStep(){
         System.arraycopy(algorithm.getLastStep(), 0, array, 0, NUM_BARS);
-        System.arraycopy(algorithm.pair.get(algorithm.position), 0, pair, 0, 2);
+        System.arraycopy(algorithm.pair.get(algorithm.getPosition()), 0, pair, 0, 2);
         repaint();
     }
 
@@ -133,9 +133,9 @@ public class SortMenu extends JPanel {
             @Override
             public void run() {
                 System.arraycopy(algorithm.getNextStep(), 0, array, 0, NUM_BARS);
-                System.arraycopy(algorithm.pair.get(algorithm.position), 0, pair, 0, 2);
+                System.arraycopy(algorithm.pair.get(algorithm.getPosition()), 0, pair, 0, 2);
                 repaint();
-                if (algorithm.position == algorithm.stepSort.size() - 1 || pause.get()){
+                if (algorithm.getPosition() == algorithm.stepSort.size() - 1 || pause.get()){
                     System.out.println("timer stopped");
                     time.cancel();
                     return;

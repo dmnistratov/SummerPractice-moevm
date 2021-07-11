@@ -10,7 +10,7 @@ public abstract class SortVariant {
     private static final Logger log = Logger.getLogger(SortVariant.class);
 
     public ArrayList<int[]> stepSort;
-    public int position;
+    private int position;
     public ArrayList<int[]> pair;
 
     public SortVariant(int[] a){
@@ -56,5 +56,9 @@ public abstract class SortVariant {
     public int[] getCurrentStep(){
         log.info("Get current");
         return stepSort.get(position);
+    }
+
+    public int getPosition(){
+        return position;
     }
 }
