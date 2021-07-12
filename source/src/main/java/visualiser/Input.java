@@ -1,5 +1,6 @@
 package visualiser;
 
+import algorithms.BogoSort;
 import algorithms.BubbleSort;
 import algorithms.CocktailSort;
 import algorithms.HeapSort;
@@ -7,14 +8,11 @@ import com.jidesoft.swing.RangeSlider;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 
 public class Input {
+    public Visualise visWindow;
     JFrame window;
-    Visualise visWindow;
     JPanel mainPanel, generatePanel, inputPanel, radioBoxPanel;
     JLabel infoSort, infoArray, infoSize, infoRange, infoInputMethod;
     JComboBox chooseSort;
@@ -49,75 +47,63 @@ public class Input {
         okButton = new JButton("Create");
         sequenceArray = new JCheckBox("Create Sequence Array");
 
-        inputElements.addItemListener(new ItemListener() {
-            @Override
-            public void itemStateChanged(ItemEvent e) {
-                if (e.getStateChange() == ItemEvent.SELECTED) {
-                    generatePanel.setVisible(false);
-                    inputPanel.setVisible(true);
-                } else if (e.getStateChange() == ItemEvent.DESELECTED) {
-                    generatePanel.setVisible(true);
-                    inputPanel.setVisible(false);
-                }
+        inputElements.addItemListener(e -> {
+            if (e.getStateChange() == ItemEvent.SELECTED) {
+                generatePanel.setVisible(false);
+                inputPanel.setVisible(true);
+            } else if (e.getStateChange() == ItemEvent.DESELECTED) {
+                generatePanel.setVisible(true);
+                inputPanel.setVisible(false);
             }
         });
-        generateElements.addItemListener(new ItemListener() {
-            @Override
-            public void itemStateChanged(ItemEvent e) {
-                if (e.getStateChange() == ItemEvent.SELECTED) {
-                    generatePanel.setVisible(true);
-                    inputPanel.setVisible(false);
-                } else if (e.getStateChange() == ItemEvent.DESELECTED) {
-                    generatePanel.setVisible(false);
-                    inputPanel.setVisible(true);
-                }
+        generateElements.addItemListener(e -> {
+            if (e.getStateChange() == ItemEvent.SELECTED) {
+                generatePanel.setVisible(true);
+                inputPanel.setVisible(false);
+            } else if (e.getStateChange() == ItemEvent.DESELECTED) {
+                generatePanel.setVisible(false);
+                inputPanel.setVisible(true);
             }
         });
 
-        okButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                visWindow.drawMenu.setArraySize(sizeSlider.getValue());
-                if (inputElements.isSelected()) {
-                    try {
-                        visWindow.drawMenu.setArrayFromString(arrayInput.getText());
-                    } catch (IndexOutOfBoundsException | NumberFormatException ex) {
-                        System.out.println("ERROR!");
-                        return;  //#TODO
-                    }
+        okButton.addActionListener(e -> {
+            visWindow.drawMenu.setArraySize(sizeSlider.getValue());
+            if (inputElements.isSelected()) {
+                try {
+                    visWindow.drawMenu.setArrayFromString(arrayInput.getText());
+                } catch (IndexOutOfBoundsException | NumberFormatException ex) {
+                    System.out.println("ERROR!");
+                    return;  //#TODO
+                }
+            } else {
+                if (sequenceArray.isSelected()) {
+                    visWindow.drawMenu.generateSequenceArray();
                 } else {
-                    if (sequenceArray.isSelected()) {
-                        visWindow.drawMenu.generateSequenceArray();
-                    } else {
-                        visWindow.drawMenu.generateInRange(rangeSlider.getLowValue(), rangeSlider.getHighValue());
-                    }
+                    visWindow.drawMenu.generateInRange(rangeSlider.getLowValue(), rangeSlider.getHighValue());
                 }
-                switch (chooseSort.getSelectedIndex()) {
-                    case 0:
-                        visWindow.drawMenu.setAlgorithm(new BubbleSort(visWindow.drawMenu.array));
-                        System.out.println("Bubble");
-                        break;
-                    case 1:
-                        visWindow.drawMenu.setAlgorithm(new CocktailSort(visWindow.drawMenu.array));
-                        System.out.println("Cocktail");
-                        break;
-                    case 2:
-                        visWindow.drawMenu.setAlgorithm(new HeapSort(visWindow.drawMenu.array));
-                        System.out.println("Heap");
-                        break;
-                }
-                visWindow.drawMenu.startSorting();
-                visWindow.setVisible(true);
-                window.setVisible(false);
             }
+            switch (chooseSort.getSelectedIndex()) {
+                case 0:
+                    visWindow.drawMenu.setAlgorithm(new BubbleSort(visWindow.drawMenu.array));
+                    System.out.println("Bubble");
+                    break;
+                case 1:
+                    visWindow.drawMenu.setAlgorithm(new CocktailSort(visWindow.drawMenu.array));
+                    System.out.println("Cocktail");
+                    break;
+                case 2:
+                    visWindow.drawMenu.setAlgorithm(new HeapSort(visWindow.drawMenu.array));
+                    System.out.println("Heap");
+                    break;
+            }
+            visWindow.drawMenu.startSorting();
+            visWindow.setVisible(true);
+            window.setVisible(false);
         });
 
-        visWindow.actionMenu.settingsButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                visWindow.setVisible(false);
-                window.setVisible(true);
-            }
+        visWindow.actionMenu.settingsButton.addActionListener(e -> {
+            visWindow.setVisible(false);
+            window.setVisible(true);
         });
 
         generatePanel.setLayout(new BoxLayout(generatePanel, BoxLayout.PAGE_AXIS));
@@ -135,6 +121,8 @@ public class Input {
         sizeSlider.setPaintLabels(true);
         sizeSlider.setMajorTickSpacing(18);
         sizeSlider.setMinorTickSpacing(2);
+        rangeSlider.setLowValue(300);
+        rangeSlider.setHighValue(500);
         rangeSlider.setPaintTicks(true);
         rangeSlider.setPaintLabels(true);
         rangeSlider.setMajorTickSpacing(100);

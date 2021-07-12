@@ -34,9 +34,6 @@ public class SortMenu extends JPanel {
         pause = new AtomicBoolean(true);
     }
 
-    void setArray(int[] newArray) {
-        System.arraycopy(newArray, 0, array, 0, NUM_BARS);
-    }
 
     SortMenu setArraySize(int size) {
         NUM_BARS = size;
@@ -47,7 +44,7 @@ public class SortMenu extends JPanel {
     }
 
     SortMenu setArrayFromString(String text) {
-        String strInt[];
+        String[] strInt;
         strInt = text.split(" ");
         for (int i = 0; i < NUM_BARS; i++) {
             array[i] = Integer.parseInt(strInt[i]);
@@ -95,49 +92,52 @@ public class SortMenu extends JPanel {
         return temp;
     }
 
-    void startStep(){
+    void startStep() {
         System.arraycopy(algorithm.getFirstStep(), 0, array, 0, NUM_BARS);
         System.arraycopy(algorithm.pair.get(algorithm.position), 0, pair, 0, 2);
         repaint();
     }
 
-    void prevStep(){
+    void prevStep() {
         System.arraycopy(algorithm.getPrevStep(), 0, array, 0, NUM_BARS);
         System.arraycopy(algorithm.pair.get(algorithm.position), 0, pair, 0, 2);
         repaint();
     }
 
-    void nextStep(){
+    void nextStep() {
         System.arraycopy(algorithm.getNextStep(), 0, array, 0, NUM_BARS);
         System.arraycopy(algorithm.pair.get(algorithm.position), 0, pair, 0, 2);
         repaint();
     }
 
-    void endStep(){
+    void endStep() {
         System.arraycopy(algorithm.getLastStep(), 0, array, 0, NUM_BARS);
         System.arraycopy(algorithm.pair.get(algorithm.position), 0, pair, 0, 2);
         repaint();
     }
 
-    SortMenu startSorting(){
+    SortMenu startSorting() {
         algorithm.setStepSort();
         return this;
     }
-    void animate(){
+
+    void animate() {
         int delay = 2;
 
         repaint();
         time = new Timer();
-        int i = 0;
+
         time.schedule(new TimerTask() {
             @Override
             public void run() {
                 System.arraycopy(algorithm.getNextStep(), 0, array, 0, NUM_BARS);
                 System.arraycopy(algorithm.pair.get(algorithm.position), 0, pair, 0, 2);
                 repaint();
-                if (algorithm.position == algorithm.stepSort.size() - 1 || pause.get()){
+                if (algorithm.position == algorithm.stepSort.size() - 1 || pause.get()) {
                     System.out.println("timer stopped");
                     time.cancel();
+                    pause.set(true);
+                    ActionMenu.playStep.setIcon(ActionMenu.playIcon);
                     return;
                 }
             }
@@ -162,4 +162,5 @@ public class SortMenu extends JPanel {
             graphics.fillRect(xBegin, yBegin, BAR_WIDTH, height);
         }
     }
+
 }
