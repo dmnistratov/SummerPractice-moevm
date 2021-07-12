@@ -2,8 +2,6 @@ package visualiser;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.Arrays;
 
 public class Visualise extends JFrame {
@@ -38,67 +36,41 @@ public class Visualise extends JFrame {
         add(actionMenu);
         add(panel);
 
-        actionMenu.infoButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (getContentPane().getPreferredSize().width == 1600) {
-                    text.append(">> Show Console\n");
-                    getContentPane().setPreferredSize(new Dimension(1800, 900));
-                } else {
-                    text.append(">> Hide Console\n");
-                    getContentPane().setPreferredSize(new Dimension(1600, 900));
-                }
-                pack();
-                setLocationRelativeTo(null);
+        actionMenu.infoButton.addActionListener(e -> {
+            if (getContentPane().getPreferredSize().width == 1600) {
+                text.append(">> Show Console\n");
+                getContentPane().setPreferredSize(new Dimension(1800, 900));
+            } else {
+                text.append(">> Hide Console\n");
+                getContentPane().setPreferredSize(new Dimension(1600, 900));
             }
+            pack();
+            setLocationRelativeTo(null);
         });
 
-        actionMenu.playStep.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                text.append(">> Start of Animation:\n");
-                text.append("Sorted array: " + Arrays.toString(drawMenu.array) + "\n");
-                drawMenu.pause.set(!drawMenu.pause.get());
-                if (!drawMenu.pause.get()) {
-                    actionMenu.playStep.setIcon(actionMenu.pauseIcon);
-                    drawMenu.animate();
-                }
-                else{
-                    actionMenu.playStep.setIcon(actionMenu.playIcon);
-                }
-                text.append("Swapped elements: " + (drawMenu.algorithm.stepSort.size() - 1) + "\n");
+        ActionMenu.playStep.addActionListener(e -> {
+            text.append(">> Start of Animation:\n");
+            text.append("Sorted array: " + Arrays.toString(drawMenu.array) + "\n");
+            drawMenu.pause.set(!drawMenu.pause.get());
+            if (!drawMenu.pause.get()) {
+                ActionMenu.playStep.setIcon(actionMenu.pauseIcon);
+                drawMenu.animate();
+            } else {
+                ActionMenu.playStep.setIcon(ActionMenu.playIcon);
             }
+            text.append("Swapped elements: " + (drawMenu.algorithm.stepSort.size() - 1) + "\n");
         });
 
-        actionMenu.prevStep.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                drawMenu.prevStep();
-            }
-        });
+        actionMenu.prevStep.addActionListener(e -> drawMenu.prevStep());
 
-        actionMenu.nextStep.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                drawMenu.nextStep();
-            }
-        });
+        actionMenu.nextStep.addActionListener(e -> drawMenu.nextStep());
 
-        actionMenu.startStep.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                drawMenu.startStep();
-            }
-        });
+        actionMenu.startStep.addActionListener(e -> drawMenu.startStep());
 
-        actionMenu.endStep.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                drawMenu.endStep();
-            }
-        });
+        actionMenu.endStep.addActionListener(e -> drawMenu.endStep());
 
         pack();
         setLocationRelativeTo(null);
     }
 }
+
