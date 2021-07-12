@@ -1,6 +1,5 @@
 package visualiser;
 
-import algorithms.BogoSort;
 import algorithms.BubbleSort;
 import algorithms.CocktailSort;
 import algorithms.HeapSort;

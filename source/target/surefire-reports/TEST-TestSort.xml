@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="10" failures="0" name="TestSort" time="0.118" errors="0" skipped="0">
+<testsuite tests="10" failures="0" name="TestSort" time="0.137" errors="0" skipped="0">
   <properties>
     <property name="idea.version" value="2021.1.2"/>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
@@ -64,14 +64,14 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="TestSort" name="testHeapSameEl" time="0.087"/>
+  <testcase classname="TestSort" name="testHeapSameEl" time="0.108"/>
   <testcase classname="TestSort" name="testCocktailEmpty" time="0"/>
   <testcase classname="TestSort" name="testHeap" time="0"/>
-  <testcase classname="TestSort" name="testMove" time="0.028"/>
-  <testcase classname="TestSort" name="testBubbleSameEl" time="0"/>
-  <testcase classname="TestSort" name="testCocktail" time="0.001"/>
+  <testcase classname="TestSort" name="testMove" time="0.027"/>
+  <testcase classname="TestSort" name="testBubbleSameEl" time="0.001"/>
+  <testcase classname="TestSort" name="testCocktail" time="0"/>
   <testcase classname="TestSort" name="testBubbleEmpty" time="0"/>
   <testcase classname="TestSort" name="testCocktailSameEl" time="0"/>
-  <testcase classname="TestSort" name="testHeapEmpty" time="0"/>
-  <testcase classname="TestSort" name="testBubble" time="0.002"/>
+  <testcase classname="TestSort" name="testHeapEmpty" time="0.001"/>
+  <testcase classname="TestSort" name="testBubble" time="0"/>
 </testsuite>
